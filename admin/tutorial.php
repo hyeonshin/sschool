@@ -116,7 +116,7 @@ if (isset($_GET['id'])) {
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">Tutorial Table</h4>
                   <p class="card-category">Berisi Data Tutorial-Tutorial Pada Website Special School</p>
-                  <button class="btn btn-success"><a href="./add_tutorial.php"><span class="fa fa-plus"> Tambah Data</a></button>
+                  <button class="btn btn-success"><a href="./add_tutorial.php?id=<?= base64_encode($id); ?>"><span class="fa fa-plus"> Tambah Data</a></button>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">

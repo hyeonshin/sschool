@@ -19,23 +19,23 @@ if (isset($_GET['id'])) {
 
 }
 if (isset($_POST['kirim'])) {
-	$id_tutorial = htmlentities($_POST['id_tutorial']);		
+	$id_tutorial = "";	
 	$ket = htmlentities($_POST['ket']);
-  $id_materi = htmlentities($_POST['id_materi']);  
+    $id_materi = htmlentities($_POST['id_materi']);  
 	$nama_tutorial = htmlentities($_POST['nama_tutorial']);
 	$link = htmlentities($_POST['link']);
-	$edit = $lib->edit_tutorial($id_tutorial,$nama_tutorial, $ket, $id_materi, $link);
+	$edit = $lib->add_tutorial($id_tutorial,$nama_tutorial, $ket, $id_materi, $link);
 	if ($edit == "SUCCESS") {
 		echo "
 		<script>
-		alert('Data berhasil di edit!');
+		alert('Data berhasil di tambah!');
 		window.location.href='./materi.php';
 		</script>
 		";
 	} else {
 		echo "
 		<script>
-		alert('Data gagal di edit!');
+		alert('Data gagal di tambah!');
 		</script>
 		";
 	}
@@ -130,56 +130,50 @@ if (isset($_POST['kirim'])) {
         </div>
       </nav>
       <!-- End Navbar -->
-      <?php while ($data = $view->fetch(PDO::FETCH_OBJ)) { ?>
+     
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Edit Tutorial</h4>
-                  <p class="card-category">Mengubah Data Tutorial</p>
+                  <h4 class="card-title">Add Tutorial</h4>
+                  <p class="card-category">Tambah Data Tutorial</p>
                 </div>
                 <div class="card-body">
                   <form action="" method="post">
-                    <input type="hidden" name="id_tutorial" class="form-control" value="<?= $data->id_tutorial; ?>">
+                    <input type="hidden" name="id_materi" class="form-control" value="<?= $id; ?>">
                     <div class="row">
                       <div class="col-md-1">
                         <div class="form-group">
-                          <label class="bmd-label-floating">ID Student</label>
-                          <input type="number" class="form-control" disabled value="<?= $data->id_tutorial; ?>">
-                        </div>
-                      </div>
-                      <div class="col-md-1">
-                        <div class="form-group">
                           <label class="bmd-label-floating">ID Materi</label>
-                          <input type="text" class="form-control" name="id_materi" value="<?= $data->id_materi; ?>">
+                          <input type="number" class="form-control" disabled value="<?= $id; ?>">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Tutorial</label>
-                          <input type="text" class="form-control" name="nama_tutorial" value="<?= $data->nama_tutorial; ?>">
+                          <input type="text" class="form-control" name="nama_tutorial">
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
-                            <label class="bmd-label-floating"> Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket"><?= $data->ket; ?></textarea>
+                            <label class="bmd-label-floating">Keterangan</label>
+                            <textarea class="form-control" rows="5" name="ket"></textarea>
                           </div>
                         </div>
                       </div>                      
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
-                            <label class="bmd-label-floating"> Link</label>
-                            <textarea class="form-control" rows="2" name="link"><?= $data->link; ?></textarea>
+                            <label class="bmd-label-floating">Link</label>
+                            <textarea class="form-control" rows="2" name="link"></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right" name="kirim" href="./edit_tutorial.php?id=<?= base64_encode($data->id_tutorial); ?>">Update Tutorial</button>
+                    <button type="submit" class="btn btn-primary pull-right" name="kirim">Add Tutorial</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -188,7 +182,6 @@ if (isset($_POST['kirim'])) {
           </div>
         </div>
       </div>
-      <?php } ?>
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
