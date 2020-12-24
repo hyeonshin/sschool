@@ -329,6 +329,27 @@ class Library extends Koneksi
 			return FALSE;
 		}
 	}
+	public function add_materi($id_materi, $nama_materi, $ket)
+	{
+		
+		try {
+			$sql = "INSERT INTO `tbl_materi`(`id_materi`, `nama_materi`, `ket`) VALUES (?,?,?)";
+			$query = $this->koneksi->db->prepare($sql);
+			$query->bindParam(1, $id_materi);
+			$query->bindParam(2, $nama_materi);
+			$query->bindParam(3, $ket);
+			
+			$query->execute();
+			if ($query) {
+				return "SUCCESS";
+			} else {
+				return "FAILED";
+			}
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+			return FALSE;
+		}
+	}
 	public function edit_tutorial($id_tutorial, $ket, $id_materi, $link)
 	{
 		

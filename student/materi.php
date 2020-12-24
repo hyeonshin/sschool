@@ -151,33 +151,47 @@ $v_tutorial = $lib->view_tutorial();
 		<div class="container">
 			<div class="row courses_row">
 				
-				<?php while ($data = $v_tutorial->fetch(PDO::FETCH_OBJ)) { 
-                    $a = 1;
+				<?php
+								
+				while ($data = $v_tutorial->fetch(PDO::FETCH_OBJ)) {
+					
+					$a = 1;
                     ?>
 				<!-- Course -->
 				<div class="col-lg-3 course_col">
 					<div class="course">
 						<div class="course_image"><img src="images/course_8.jpg" alt=""></div>
 						<div class="course_body">
-							<div class="course_title"><a href="course.html"><?= $tutorial->nama_tutorial; ?></a></div>
+							<div class="course_title"><a href="course.html"><?php if(isset($tutorial->nama_tutorial)){echo $tutorial->nama_tutorial;}else{echo "Data Tidak Ada";} ?></a></div>
 							<div class="course_info">
 								<ul>
-									<li><a href="instructors.html"><?= $materi->nama_materi ?></a></li>
-									<li><a href="#">Tutorial <?= $a; ?></a></li>
+									<li><a href="instructors.html"><?php if(isset($materi->nama_materi) AND isset($tutorial->id_tutorial)){echo $materi->nama_materi;} ?></a></li>
+									<li><a href="#"> <?php if(isset($materi->nama_materi) AND isset($tutorial->id_tutorial)){echo "Tutorial ".$a;} ?></a></li>
 								</ul>
 							</div>
 							<div class="course_text">
-								<p><?= $tutorial->ket; ?></p>
+								<p><?php if(isset($tutorial->ket)){echo $tutorial->ket;} ?></p>
 							</div>
 						</div>
 						<div class="course_footer d-flex flex-row align-items-center justify-content-start">
-							<div class="course_mark course_free trans_200"><a href="tutorial.php?id=<?= base64_encode($data->id_materi); ?>">Pelajari</a></div>
+							<?php
+							if(isset($tutorial->id_tutorial))
+							{
+								echo "<div class='course_mark course_free trans_200'><a href='tutorial.php?id=".base64_encode($data->id_materi)."'>Pelajari</a></div>";
+							}
+							else{
+								echo "<div class='course_mark course_free trans_200'><a href='./'>Kembali</a></div>";
+							}
+							?>
+							
 						</div>
 					</div>
 				</div>
                 <?php 
                 $a++;
-                } ?>
+				}
+				
+				?>
 
 			
 
