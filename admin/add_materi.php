@@ -150,7 +150,7 @@ if (isset($_POST['kirim'])) {
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right" name="kirim" >Tambah Materi</button>
+                    <button type="submit" class="btn btn-primary pull-right" name="kirim" >Add Materi</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
