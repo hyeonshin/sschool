@@ -46,19 +46,10 @@ class Library extends Koneksi
 	}
 
 	//code buat soal
-	public function buat_soal($id_soal, $gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $date, $aktif, $id_tutorial)
+	public function add_soal($id_soal, $gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial)
 	{
-		$id_soal ="";
-		$gambar = htmlentities($_POST['gambar']);
-		$soal = htmlentities($_POST['soal']);
-		$pil_a = htmlentities($_POST['pil_a']);
-		$pil_b = htmlentities($_POST['pil_b']);
-		$pil_c = htmlentities($_POST['pil_c']);
-		$pil_d = htmlentities($_POST['pil_d']);
-		$kj = htmlentities($_POST['kj']);
 		$date = "";
 		$aktif = "YES";
-		$id_tutorial = 1;
 
 		try {
 			$sql = "INSERT INTO `tbl_soal`(`id_soal`, `gambar`, `soal`, `pil_a`,`pil_b`, `pil_c`, `pil_d`, `kj`, `date`, `aktif`, `id_tutorial`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -397,16 +388,17 @@ class Library extends Koneksi
 	{
 		
 		try {
-			$sql = "UPDATE `tbl_soal` SET `gambar`=?,`soal`=?,`pil_a`=?,`pil_b`=?,`pil_c`=?,`pil_d`=?,`kj`=?,`id_tutorial`=? WHERE id_soal='$id_soal'";
+			$sql = "INSERT INTO `tbl_soal`(`id_soal`, `gambar`, `soal`, `id_materi`, `link`) VALUES (?,?,?,?,?)";
 			$query = $this->koneksi->db->prepare($sql);
-			$query->bindParam(1, $gambar);
-			$query->bindParam(2, $soal);
-			$query->bindParam(3, $pil_a);
-			$query->bindParam(4, $pil_b);
-			$query->bindParam(5, $pil_c);
-			$query->bindParam(6, $pil_d);
-			$query->bindParam(7, $kj);
-			$query->bindParam(8, $id_tutorial);
+			$query->bindParam(1, $id_soal);
+			$query->bindParam(2, $gambar);
+			$query->bindParam(3, $soal);
+			$query->bindParam(4, $pil_a);
+			$query->bindParam(5, $pil_b);
+			$query->bindParam(6, $pil_c);
+			$query->bindParam(7, $pil_d);
+			$query->bindParam(8, $kj);
+			$query->bindParam(9, $id_tutorial);
 			$query->execute();
 			if ($query) {
 				return "SUCCESS";
@@ -418,6 +410,7 @@ class Library extends Koneksi
 			return FALSE;
 		}
 	}
+	
 
 	// on off sesuatuuu -------------------
 	public function off_tutorial($id_tutorial)

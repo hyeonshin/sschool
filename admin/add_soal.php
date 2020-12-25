@@ -15,8 +15,49 @@ $get_data = $auth->get_data_admin();
 if (isset($_GET['id'])) {
 	$id = base64_decode($_GET['id']);
 
-	$view = $lib->view_soal_id($id);
- 
+	$view = $lib->select_soal_id($id);
+
+}
+if (isset($_POST['kirim'])) {
+	$id_soal = "";	
+    $gambar = htmlentities($_POST['gambar']);
+    $soal = htmlentities($_POST['soal']);
+    $pil_a = htmlentities($_POST['pil_a']);
+    $pil_b = htmlentities($_POST['pil_b']);
+    $pil_c = htmlentities($_POST['pil_c']);
+    $pil_d = htmlentities($_POST['pil_d']);
+    $kj = htmlentities($_POST['kj']);
+    $id_tutorial = htmlentities($_POST['id_tutorial']);
+    if($kj == $pil_a OR $kj == $pil_b OR $kj == $pil_c OR $kj == $pil_d)
+    {
+    $add = $lib->add_soal($id_soal, $gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial);
+    }
+    else{
+        $add = "SAMA";
+    }
+	if ($add == "SUCCESS") {
+		echo "
+		<script>
+		alert('Data berhasil di edit!');
+		window.location.href='./materi.php';
+		</script>
+		";
+    }
+    else if($add == "SAMA")
+    {
+        echo "
+		<script>
+		alert('Kunci Jawaban Tidak Cocok!');
+		</script>
+		";
+    } 
+    else {
+		echo "
+		<script>
+		alert('Data gagal di edit!');
+		</script>
+		";
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -59,7 +100,7 @@ if (isset($_GET['id'])) {
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="./user.php">
               <i class="material-icons">person</i>
               <p>Student Profile</p>
@@ -85,7 +126,7 @@ if (isset($_GET['id'])) {
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Table Tutorial</a>
+            <a class="navbar-brand" href="javascript:void(0)">Student Profile</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -114,90 +155,69 @@ if (isset($_GET['id'])) {
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Tutorial Table</h4>
-                  <p class="card-category">Berisi Data Tutorial-Tutorial Pada Website Special School</p>
-                  <button class="btn btn-success"><a href="./add_soal.php?id=<?= base64_encode($id); ?>"><span class="fa fa-plus"> Tambah Data</a></button>
+                  <h4 class="card-title">Add Soal</h4>
+                  <p class="card-category">Menambahkan Data Soal</p>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Gambar
-                        </th>
-                        <th>
-                          Soal
-                        </th>
-                        <th>
-                            Opsi A
-                        </th>
-                        <th>
-                            Opsi B
-                        </th>
-                        <th>
-                            Opsi C
-                        </th>
-                         <th>
-                            Opsi D
-                        </th>
-                         <th>
-                            Kunci Jawaban
-                        </th>
-                         <th>
-                            Status
-                        </th>
-                         <th>
-                            ID Tutorial
-                        </th>
-                        <th>
-                          Action
-                        </th>
-                      </thead>
-                      <tbody>
-                        <?php while ($data = $view->fetch(PDO::FETCH_OBJ)) { ?>
-                        <tr>
-                          <td>
-                            <?= $data->id_soal;?>
-                          </td>
-                          <td>
-                            <?= $data->gambar;?>
-                          </td>
-                          <td><span class="d-inline-block text-truncate" style="max-width: 150px;">
-                            <?= $data->soal;?>
-                          </td>
-                          <td>
-                            <?= $data->pil_a;?>
-                          </td>
-                          <td>
-                            <?= $data->pil_b;?>
-                          </td>
-                          <td>
-                            <?= $data->pil_c;?>
-                          </td>
-                          <td>
-                            <?= $data->pil_d;?>
-                          </td>
-                          <td>
-                            <?= $data->kj;?>
-                          </td>
-                          <td>
-                            <?php if($data->aktif == "YES") {echo "AKTIF";} else{echo "TIDAK AKTIF";}?>
-                          </td>
-                           <td>
-                            <?= $data->id_tutorial;?>
-                          </td>
-                          <td>
-                            <button class="btn btn-primary"><a href="./edit_soal.php?id=<?= base64_encode($data->id_soal); ?>"><span class="fa fa-pencil"> Edit</a></button>
-                            <button class="btn btn-<?php if($data->aktif == "YES") {echo "danger";} else{echo "success";}?>"><a href="./<?php if($data->aktif == "YES") {echo "off";} else{echo "on";}?>_soal.php?id=<?= base64_encode($data->id_soal); ?>"><span class="fa fa-power-off"> <?php if($data->aktif == "YES") {echo "OFF";} else{echo "ON";}?></a></button>
-                          </td>
-                        </tr>
-                        <?php } ?>
-                      </tbody>
-                    </table>
-                  </div>
+                  <form action="" method="post">
+                    <input type="hidden" name="id_tutorial" class="form-control" value="<?= $id; ?>">
+                    <div class="row">
+                      <div class="col-md-1">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">ID Tutorial</label>
+                          <input type="number" class="form-control" disabled value="<?= $id; ?>">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Link Gambar</label>
+                            <textarea class="form-control" rows="2" name="gambar"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Soal</label>
+                            <textarea class="form-control" rows="3" name="soal" required></textarea>
+                          </div>
+                        </div>
+                      </div>      
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Opsi A</label>
+                          <input type="text" class="form-control" name="pil_a" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Opsi B</label>
+                          <input type="text" class="form-control" name="pil_b" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Opsi C</label>
+                          <input type="text" class="form-control" name="pil_c" required>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Opsi D</label>
+                          <input type="text" class="form-control" name="pil_d" required>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Kunci Jawaban</label>
+                          <input type="text" class="form-control" name="kj" required>
+                        </div>
+                      </div>                
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right" name="kirim" >Tambah Soal</button>
+                    <div class="clearfix"></div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -209,22 +229,22 @@ if (isset($_GET['id'])) {
           <nav class="float-left">
             <ul>
               <li>
-                <a href="#">
+                <a href="https://www.creative-tim.com">
                   Creative Tim
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="https://creative-tim.com/presentation">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="http://blog.creative-tim.com">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#/license">
+                <a href="https://www.creative-tim.com/license">
                   Licenses
                 </a>
               </li>
