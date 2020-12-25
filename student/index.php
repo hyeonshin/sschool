@@ -83,8 +83,8 @@ $materi = $lib->view_materi();
 							</div>
 							<nav class="main_nav_contaner">
 								<ul class="main_nav">
-									<li class="active"><a href="index.php">Materi</a></li>
-									<li><a href="#">Profil</a></li>
+									<li class="active"><a href="./index.php">Materi</a></li>
+									<li><a href="./profile.php">Profil</a></li>
 								</ul>
 							</nav>
 							<div class="header_content_right ml-auto text-right">
@@ -111,9 +111,9 @@ $materi = $lib->view_materi();
 		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="index.php">Materi</a></li>
-				<li class="menu_mm"><a href="courses.html">Profil</a></li>				
-				<li class="menu_mm"><a href="logout.php">Logout</a></li>
+				<li class="menu_mm"><a href="./index.php">Materi</a></li>
+				<li class="menu_mm"><a href="./profile.php">Profil</a></li>				
+				<li class="menu_mm"><a href="./logout.php">Logout</a></li>
 			</ul>
 		</nav>
 	</div>

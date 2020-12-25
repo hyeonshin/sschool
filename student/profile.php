@@ -5,26 +5,20 @@ require_once '../config/authentication.php';
 $lib = new Library();
 $auth = new Authentication();
 
-$get_data = $auth->get_data_std();
-
 if (!$auth->logged_std()) {
-	header("Location: ../login/login.php");
+    header("Location: ../login/login.php");
 }
-if (isset($_GET['id'])) {
-	$id = base64_decode($_GET['id']);
 
-	$select = $lib->select_soal($id);
-	$data = $select->fetch(PDO::FETCH_OBJ);
-	$view = $lib->view_soal($id);
-}
+$get_data = $auth->get_data_std();
+$nilai = $lib->select_nilai($get_data['id_user']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Special School</title>
+<title>Special School Site</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Special School project">
+<meta name="description" content="Lingua project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -51,6 +45,7 @@ if (isset($_GET['id'])) {
 							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
 								<div class="top_bar_phone"><span class="top_bar_title">Hallo! </span> <?= strtoupper($get_data['nama_user']); ?></div>
 								<div class="top_bar_right ml-auto">
+
 									<!-- Language -->
 									<div class="top_bar_lang">
 										<span class="top_bar_title">site language:</span>
@@ -86,8 +81,8 @@ if (isset($_GET['id'])) {
 							</div>
 							<nav class="main_nav_contaner">
 								<ul class="main_nav">
-									<li class="active"><a href="./index.php">Materi</a></li>
-									<li><a href="./profile.php">Profil</a></li>
+									<li ><a href="./index.php">Materi</a></li>
+									<li class="active"><a href="./profile.php">Profil</a></li>
 								</ul>
 							</nav>
 							<div class="header_content_right ml-auto text-right">
@@ -121,15 +116,71 @@ if (isset($_GET['id'])) {
 		</nav>
 	</div>
 	
-	<!-- Home -->
+	<!-- Instructors -->
 
-	<div class="home">
-		<div class="home_background" style="background-image: url(images/index_background.jpg);"></div>
-		<div class="home_content">
-			<div class="container">
-				<div class="row">
-					<div class="col text-center">
-						<h1 class="home_title">Selamat Mengerjakan!</h1>
+	<div class="instructors">
+		<div class="instructors_background" style="background-image:url(images/instructors_background.png)"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h2 class="section_title text-center">The Best Tutors in Town</h2>
+				</div>
+			</div>
+			<div class="row instructors_row">
+
+				
+
+				<!-- Instructor -->
+				<div class="col-lg-12 instructor_col">
+					<div class="instructor text-center">
+						<div class="instructor_image_container">
+							<div class="instructor_image"><img src="images/instructor_2.jpg" alt=""></div>
+						</div>
+						<div class="instructor_name"><a href="instructors.html"><?php echo ucwords($get_data['nama_user']);?></a></div>
+						<div class="instructor_title">Student</div>
+						<div class="instructor_text">
+							<figure>
+								<blockquote class="blockquote">
+									<p>"Pendidikan adalah senjata paling mematikan di dunia, karena dengan pendidikan, Anda dapat mengubah dunia."</p>
+								</blockquote>
+								<figcaption class="blockquote-footer">
+									Nelson Mandela.
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Register -->
+
+	<div class="register">
+		<div class="container">
+			<div class="row">
+				
+				<!-- Register Form -->
+			<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="register_form_container">
+						<div class="register_form_title text-center" style="margin-bottom:10px;">History Nilai</div>
+						<table class="table table-light" border="1">
+							<thead>
+								<th >Nilai</th>
+								<th >Nama Tutorial</th>
+								<th >Status</th>
+							</thead>
+							<?php
+							while ($data = $nilai->fetch(PDO::FETCH_OBJ)) {?>
+							<tr style="color:black;" <?php if($data->status == "FAILED"){echo "class='table-danger'";} ?>>
+								<td><?=$data->nilai;?></td>
+								<td><?=$data->nama_tutorial;?></td>
+								<td><?=$data->status; ?></td>
+							</tr>
+							<?php } ?>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -137,109 +188,10 @@ if (isset($_GET['id'])) {
 	</div>
 
 	
+		<!-- Footer -->
 
-	<!-- Register -->
-
-	<div class="register" style="padding-bottom: 200px;">
-		<div class="container">
-			<div class="row">
-				
-				<!-- Register Form -->
-                <div class="col-lg-2">
-                </div>
-				<div class="col-lg-8">
-					<div class="register_form_container">
-                        <div class="register_form_title">Soal Latihan</div>
-						<section class="soal ml-auto" style="text-align: justify;">
-                    
-						<form action="kunci.php" id="register_form" class="register_form" method="post">
-							<div class="row register_row">
-							<?php
-							$jumlah = $lib->count_soal();				
-							$no = 0;
-							$cb = 0;
-							while($data = $view->fetch(PDO::FETCH_OBJ)){
-								
-							?>
-							<input type="hidden" name="id[]" value="<?php echo $data->id_soal; ?>">
-							<input type="hidden" name="jumlah" value="<?php echo $jumlah; ?>">
-							<input type="hidden" name="id_tutorial" value="<?= $id; ?>">
-								<div class="col-sm-12 register_col">
-                                    <p class="lh-sm"><b><?php echo $no = $no+1; ?>.</b>
-                                    <?php
-							        if(!empty($data->gambar)){
-                                    echo "<img src='foto/$data[gambar]' width='200' height='200'>";
-							        }
-						            ?>
-                                    <?= $data->soal;?>
-                                    </p>
-								</div>
-                                <div class="col-sm-1 register_col" >
-									<p>A.</p>
-								</div>
-								<div class="col-sm-11 register_col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="flexRadioDefault<?=$cb?>" name="pilihan[<?= $data->id_soal?>]" type="radio" value="<?= $data->pil_a;?>" required>
-                                        <label class="form-check-label" for="flexRadioDefault<?=$cb++?>">
-                                            <?= $data->pil_a;?>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 register_col">
-									<p>B.</p>
-								</div>
-								<div class="col-sm-11 register_col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="flexRadioDefault<?=$cb?>" name="pilihan[<?= $data->id_soal?>]" type="radio" value="<?= $data->pil_b;?>" required>
-                                        <label class="form-check-label" for="flexRadioDefault<?=$cb++?>">
-                                            <?= $data->pil_b;?>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 register_col">
-									<p>C.</p>
-								</div>
-								<div class="col-sm-11 register_col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="flexRadioDefault<?=$cb?>" name="pilihan[<?= $data->id_soal?>]" type="radio" value="<?= $data->pil_c;?>" required>
-                                        <label class="form-check-label" for="flexRadioDefault<?=$cb++?>">
-                                            <?= $data->pil_c;?>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 register_col">
-									<p>D.</p>
-								</div>
-								<div class="col-sm-11 register_col">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="flexRadioDefault<?=$cb?>" name="pilihan[<?= $data->id_soal?>]" type="radio" value="<?= $data->pil_d;?>" required>
-                                        <label class="form-check-label" for="flexRadioDefault<?=$cb++?>">
-                                            <?= $data->pil_d;?>
-                                        </label>
-                                    </div>
-                                </div>
-                                <?php }?>
-								<div class="col-sm-12">
-									<input type="submit" name="submit" class="form_button trans_200" onclick="return confirm('Apakah Anda yakin dengan jawaban Anda?')" value="Selesai">
-								</div>
-								</section>
-							</div>
-						</form>
-					</div>
-                </div>
-                <div class="col-lg-2">
-                </div>
-			</div>
-		</div>
-    </div>
-</div>
-
-	
-
-	<!-- Footer -->
-
-	<footer class="footer" >
-		<div class="footer_body" >
+	<footer class="footer">
+		<div class="footer_body">
 			<div class="container">
 				<div class="row">
 

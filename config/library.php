@@ -170,6 +170,19 @@ class Library extends Koneksi
 		}
 	}
 
+	//tentang nilai
+	public function select_nilai($id_user)
+	{
+		try {
+			$sql = "SELECT * FROM `tbl_nilai`JOIN tbl_tutorial ON tbl_nilai.id_tutorial=tbl_tutorial.id_tutorial WHERE id_user = '$id_user'";
+			$query = $this->koneksi->db->query($sql);
+			return $query;
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+			return FALSE;
+		}
+	}
+
 	//tentang tutorial
 	public function select_tutorial($id_tutorial)
 	{

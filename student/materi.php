@@ -15,11 +15,9 @@ if (isset($_GET['id'])) {
     $materi = $select->fetch(PDO::FETCH_OBJ);
     
     $select2 = $lib->select_tutorial($id);
-	$tutorial = $select2->fetch(PDO::FETCH_OBJ);
 }
 
 $get_data = $auth->get_data_std();
-$v_tutorial = $lib->view_tutorial();
 
 ?>
 
@@ -86,14 +84,14 @@ $v_tutorial = $lib->view_tutorial();
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container mr-auto">
-								<a href="index.php">
+								<a href="./index.php">
 									<div class="logo_text">Special School</div>
 								</a>
 							</div>
 							<nav class="main_nav_contaner">
 								<ul class="main_nav">
-									<li class="active"><a href="index.php">Materi</a></li>
-									<li><a href="#">Profil</a></li>
+									<li class="active"><a href="./index.php">Materi</a></li>
+									<li><a href="./profile.php">Profil</a></li>
 								</ul>
 							</nav>
 							<div class="header_content_right ml-auto text-right">
@@ -120,9 +118,9 @@ $v_tutorial = $lib->view_tutorial();
 		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="index.php">Materi</a></li>
-				<li class="menu_mm"><a href="courses.html">Profil</a></li>
-				<li class="menu_mm"><a href="logout.php">Logout</a></li>
+				<li class="menu_mm"><a href="./index.php">Materi</a></li>
+				<li class="menu_mm"><a href="./profile.php">Profil</a></li>
+				<li class="menu_mm"><a href="./logout.php">Logout</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -153,8 +151,7 @@ $v_tutorial = $lib->view_tutorial();
 				
 				<?php
 								
-				while ($data = $v_tutorial->fetch(PDO::FETCH_OBJ)) {
-					
+				while ($data = $select2->fetch(PDO::FETCH_OBJ)) {	
 					$a = 1;
                     ?>
 				<!-- Course -->
@@ -162,20 +159,20 @@ $v_tutorial = $lib->view_tutorial();
 					<div class="course">
 						<div class="course_image"><img src="images/course_8.jpg" alt=""></div>
 						<div class="course_body">
-							<div class="course_title"><a href="course.html"><?php if(isset($tutorial->nama_tutorial)){echo $tutorial->nama_tutorial;}else{echo "Data Tidak Ada";} ?></a></div>
+							<div class="course_title"><a href="course.html"><?php if(isset($data->id_tutorial)){echo $data->nama_tutorial;}else{echo "Data Tidak Ada";} ?></a></div>
 							<div class="course_info">
 								<ul>
-									<li><a href="instructors.html"><?php if(isset($materi->nama_materi) AND isset($tutorial->id_tutorial)){echo $materi->nama_materi;} ?></a></li>
-									<li><a href="#"> <?php if(isset($materi->nama_materi) AND isset($tutorial->id_tutorial)){echo "Tutorial ".$a;} ?></a></li>
+									<li><a href="instructors.html"><?php if(isset($data->id_tutorial)){echo $materi->nama_materi;} ?></a></li>
+									<li><a href="#"> <?php if(isset($data->id_tutorial) ){echo "Tutorial ".$a;} ?></a></li>
 								</ul>
 							</div>
 							<div class="course_text">
-								<p><?php if(isset($tutorial->ket)){echo $tutorial->ket;} ?></p>
+								<p><?php if(isset($data->id_tutorial)){echo $data->ket;} ?></p>
 							</div>
 						</div>
 						<div class="course_footer d-flex flex-row align-items-center justify-content-start">
 							<?php
-							if(isset($tutorial->id_tutorial))
+							if(isset($data->id_tutorial))
 							{
 								echo "<div class='course_mark course_free trans_200'><a href='tutorial.php?id=".base64_encode($data->id_materi)."'>Pelajari</a></div>";
 							}
@@ -189,8 +186,7 @@ $v_tutorial = $lib->view_tutorial();
 				</div>
                 <?php 
                 $a++;
-				}
-				
+				}				
 				?>
 
 			
@@ -209,7 +205,7 @@ $v_tutorial = $lib->view_tutorial();
 					<!-- Newsletter -->
 					<div class="col-lg-3 footer_col">
 						<div class="newsletter_container d-flex flex-column align-items-start justify-content-end">
-							<div class="footer_logo mb-auto"><a href="index.php">Special School</a></div>
+							<div class="footer_logo mb-auto"><a href="./index.php">Special School</a></div>
 							
 						</div>
 					</div>
