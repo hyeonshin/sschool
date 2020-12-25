@@ -38,7 +38,7 @@ if (isset($_POST['kirim'])) {
 	if ($add == "SUCCESS") {
 		echo "
 		<script>
-		alert('Data berhasil di edit!');
+		alert('Data berhasil di tambah!');
 		window.location.href='./materi.php';
 		</script>
 		";
@@ -54,7 +54,7 @@ if (isset($_POST['kirim'])) {
     else {
 		echo "
 		<script>
-		alert('Data gagal di edit!');
+		alert('Data gagal di tambah!');
 		</script>
 		";
 	}
