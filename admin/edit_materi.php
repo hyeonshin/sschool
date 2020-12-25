@@ -151,14 +151,14 @@ if (isset($_POST['kirim'])) {
                         <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Materi</label>
-                          <input type="text" class="form-control" name="nama_materi" value=" <?= $data->nama_materi; ?> ">
+                          <input type="text" class="form-control" name="nama_materi" value=" <?= $data->nama_materi; ?> " required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket"><?= $data->ket; ?></textarea>
+                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket; ?></textarea>
                           </div>
                         </div>
                       </div>

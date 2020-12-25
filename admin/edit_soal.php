@@ -172,7 +172,7 @@ if (isset($_POST['kirim'])) {
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Tutorial</label>
-                          <input type="number" class="form-control" name="id_tutorial" value="<?= $data->id_tutorial; ?>">
+                          <input type="number" class="form-control" name="id_tutorial" value="<?= $data->id_tutorial; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
@@ -187,38 +187,38 @@ if (isset($_POST['kirim'])) {
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating">Soal</label>
-                            <textarea class="form-control" rows="3" name="soal"><?= $data->soal; ?></textarea>
+                            <textarea class="form-control" rows="3" name="soal" required><?= $data->soal; ?></textarea>
                           </div>
                         </div>
                       </div>      
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi A</label>
-                          <input type="text" class="form-control" name="pil_a" value="<?= $data->pil_a; ?>">
+                          <input type="text" class="form-control" name="pil_a" value="<?= $data->pil_a; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi B</label>
-                          <input type="text" class="form-control" name="pil_b" value="<?= $data->pil_b; ?>">
+                          <input type="text" class="form-control" name="pil_b" value="<?= $data->pil_b; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi C</label>
-                          <input type="text" class="form-control" name="pil_c" value="<?= $data->pil_c; ?>">
+                          <input type="text" class="form-control" name="pil_c" value="<?= $data->pil_c; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi D</label>
-                          <input type="text" class="form-control" name="pil_d" value="<?= $data->pil_d; ?>">
+                          <input type="text" class="form-control" name="pil_d" value="<?= $data->pil_d; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Kunci Jawaban</label>
-                          <input type="text" class="form-control" name="kj" value="<?= $data->kj; ?>">
+                          <input type="text" class="form-control" name="kj" value="<?= $data->kj; ?>" required>
                         </div>
                       </div>                
                     </div>

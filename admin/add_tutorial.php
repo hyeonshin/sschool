@@ -153,22 +153,22 @@ if (isset($_POST['kirim'])) {
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Tutorial</label>
-                          <input type="text" class="form-control" name="nama_tutorial">
+                          <input type="text" class="form-control" name="nama_tutorial" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating">Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket"></textarea>
+                            <textarea class="form-control" rows="5" name="ket" required></textarea>
                           </div>
                         </div>
                       </div>                      
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
-                            <label class="bmd-label-floating">Link</label>
-                            <textarea class="form-control" rows="2" name="link"></textarea>
+                            <label class="bmd-label-floating">Link Video</label>
+                            <textarea class="form-control" rows="2" name="link" required></textarea>
                           </div>
                         </div>
                       </div>

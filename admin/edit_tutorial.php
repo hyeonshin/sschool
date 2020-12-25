@@ -153,20 +153,20 @@ if (isset($_POST['kirim'])) {
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Materi</label>
-                          <input type="text" class="form-control" name="id_materi" value="<?= $data->id_materi; ?>">
+                          <input type="text" class="form-control" name="id_materi" value="<?= $data->id_materi; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Tutorial</label>
-                          <input type="text" class="form-control" name="nama_tutorial" value="<?= $data->nama_tutorial; ?>">
+                          <input type="text" class="form-control" name="nama_tutorial" value="<?= $data->nama_tutorial; ?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket"><?= $data->ket; ?></textarea>
+                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket; ?></textarea>
                           </div>
                         </div>
                       </div>                      
@@ -174,7 +174,7 @@ if (isset($_POST['kirim'])) {
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Link</label>
-                            <textarea class="form-control" rows="2" name="link"><?= $data->link; ?></textarea>
+                            <textarea class="form-control" rows="2" name="link" required><?= $data->link; ?></textarea>
                           </div>
                         </div>
                       </div>
