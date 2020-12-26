@@ -57,7 +57,7 @@ if (!$auth->logged_std()) {
 			$jumlah_soal = $lib->count_soal();
 			$score = 100 / $jumlah_soal * $benar;
 			$hasil = number_format($score,0);
-
+		}
 			$id_user = $get_data['id_user'];
 			$status = "";
 			$id_nilai ="";
@@ -73,7 +73,6 @@ if (!$auth->logged_std()) {
 				";
 				echo "<script>window.location.href = './index.php';</script>";
 			}
-		}
 	}
 
 	// Simpan kedalam database

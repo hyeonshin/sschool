@@ -47,7 +47,7 @@ $get_data = $auth->get_data_admin();
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
-            <a class="nav-link" href="./dashboard.html">
+            <a class="nav-link" href="./index.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
