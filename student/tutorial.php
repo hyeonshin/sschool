@@ -5,431 +5,233 @@ require_once '../config/authentication.php';
 $lib = new Library();
 $auth = new Authentication();
 
-if (!$auth->logged_admin()) {
+if (!$auth->logged_std()) {
     header("Location: ../login/login.php");
 }
+if (isset($_GET['id'])) {
+	$id = base64_decode($_GET['id']);
 
-$get_data = $auth->get_data_admin();
-$view = $lib->view_materi();
+  	$select2 = $lib->select_materi($id);
+    $materi = $select2->fetch(PDO::FETCH_OBJ);
+    
+    $select = $lib->select_tutorial($id);
+    $tutorial = $select->fetch(PDO::FETCH_OBJ);
+}
+
+$get_data = $auth->get_data_std();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Special School Site | Admin
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- CSS Files -->
-  <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+<title>Special School Site</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Lingua project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link href="plugins/video-js/video-js.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/instructors.css">
+<link rel="stylesheet" type="text/css" href="styles/instructors_responsive.css">
 </head>
+<body>
 
-<body class="dark-edition">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+<div class="super_container">
 
-        Tip 2: you can also add an image using data-image tag
-    -->
-      <div class="logo"><a href="./index.php" class="simple-text logo-normal">
-          Special School
-        </a></div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item ">
-            <a class="nav-link" href="./index.php">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./user.php">
-              <i class="material-icons">person</i>
-              <p>Student Profile</p>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="./materi.php">
-              <i class="material-icons">book_online</i>
-              <p>Table Materi</p>
-            </a>
-          </li>
-          <!-- <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.html">
-                    <i class="material-icons">unarchive</i>
-                    <p>Upgrade to PRO</p>
-                </a>
-            </li> -->
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Table Materi</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="./logout.php">
-                  <i class="material-icons">logout</i>
-                  <p class="d-lg-none d-md-block">
-                    Logout
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Tutorial Table</h4>
-                  <p class="card-category">Berisi Data Tutorial Pada Website Special School</p>
-                  <button class="btn btn-success"><a href="./add_materi.php"><span class="fa fa-plus"> Tambah Data</a></button>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          Nama Tutorial
-                        </th>
-                        <th>
-                          Keterangan
-						</th>
-						 <th>
-                          Link
-						</th>
-						 <th>
-                          Status
-                        </th>
-                        <th>
-                          Action
-                        </th>
-                      </thead>
-                      <tbody>
-                        <?php while ($data = $view->fetch(PDO::FETCH_OBJ)) { ?>
-                        <tr>
-                          <td>
-                            <?= $data->id_tutorial;?>
-                          </td>
-                          <td>
-                            <?= $data->nama_tutorial;?>
-                          </td>
-                          <td><span class="d-inline-block text-truncate" style="max-width: 450px;">
-                            <?= $data->ket;?>
-						  </td>
-						  <td>
-                            <?= $data->link;?>
-						  </td>
-						  <td>
-                            <?= $data->nama_materi;?>
-                          </td>
-                          <td>
-                            <button class="btn btn-primary" ><a href="./more.php?id=<?= base64_encode($data->id_materi); ?>"><span class="fa fa-info-circle"> More</a></button>
-                            <button class="btn btn-primary" ><a href="./edit_tutorial.php?id=<?= base64_encode($data->id_tutorial); ?>"><span class="fa fa-pencil"> Edit</a></button>
-                          </td>
-                        </tr>
-                        <?php } ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="#">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#/license">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right" id="date">
-            , made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-        </div>
-      </footer>
-      <script>
-        const x = new Date().getFullYear();
-        let date = document.getElementById('date');
-        date.innerHTML = '&copy; ' + x + date.innerHTML;
-      </script>
-    </div>
-  </div>
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> Sidebar Filters</li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger active-color">
-            <div class="badge-colors ml-auto mr-auto">
-              <span class="badge filter badge-purple active" data-color="purple"></span>
-              <span class="badge filter badge-azure" data-color="azure"></span>
-              <span class="badge filter badge-green" data-color="green"></span>
-              <span class="badge filter badge-warning" data-color="orange"></span>
-              <span class="badge filter badge-danger" data-color="danger"></span>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="header-title">Images</li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-1.jpg" alt="">
-          </a>
-        </li>
-        <li class="active">
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-2.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-3.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="../assets/img/sidebar-4.jpg" alt="">
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chartist JS -->
-  <script src="../assets/js/plugins/chartist.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
-  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function() {
-      $().ready(function() {
-        $sidebar = $('.sidebar');
+		<!-- Header -->
 
-        $sidebar_img_container = $sidebar.find('.sidebar-background');
+	<header class="header">
+			
+		<!-- Top Bar -->
+		<div class="top_bar">
+			<div class="top_bar_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+								<div class="top_bar_phone"><span class="top_bar_title">Hallo! </span> <?= strtoupper($get_data['nama_user']); ?></div>
+								<div class="top_bar_right ml-auto">
 
-        $full_page = $('.full-page');
+									<!-- Language -->
+									<div class="top_bar_lang">
+										<span class="top_bar_title">site language:</span>
+										<ul class="lang_list">
+											<li class="hassubs">
+												<a href="#">Indonesia<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<ul>
+													<li><a href="#">English</a></li>
+												</ul>
+											</li>
+										</ul>
+									</div>
 
-        $sidebar_responsive = $('body > .navbar-collapse');
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>				
+		</div>
 
-        window_width = $(window).width();
+		<!-- Header Content -->
+		<div class="header_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_content d-flex flex-row align-items-center justify-content-start">
+							<div class="logo_container mr-auto">
+								<a href="./index.php">
+									<div class="logo_text">Special School</div>
+								</a>
+							</div>
+							<nav class="main_nav_contaner">
+								<ul class="main_nav">
+									<li class="active"><a href="./index.php">Materi</a></li>
+									<li><a href="./profile.php">Profil</a></li>
+								</ul>
+							</nav>
+							<div class="header_content_right ml-auto text-right">
 
-        $('.fixed-plugin a').click(function(event) {
-          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
-            }
-          }
-        });
+								<!-- Hamburger -->
 
-        $('.fixed-plugin .active-color span').click(function() {
-          $full_page_background = $('.full-page-background');
+								<div class="user"><a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></div>
+								<div class="hamburger menu_mm">
+									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
+								</div>
+							</div>
 
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-          var new_color = $(this).data('color');
+	</header>
 
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data-color', new_color);
-          }
+	<!-- Menu -->
 
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
+	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<nav class="menu_nav">
+			<ul class="menu_mm">
+				<li class="menu_mm"><a href="./index.php">Materi</a></li>
+				<li class="menu_mm"><a href="./profile.php">Profil</a></li>
+				<li class="menu_mm"><a href="./logout.php">Logout</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<!-- Home -->
 
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data-color', new_color);
-          }
-        });
+	<div class="home"></div>
 
-        $('.fixed-plugin .background-color .badge').click(function() {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          var new_color = $(this).data('background-color');
-
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data-background-color', new_color);
-          }
-        });
-
-        $('.fixed-plugin .img-holder').click(function() {
-          $full_page_background = $('.full-page-background');
-
-          $(this).parent('li').siblings().removeClass('active');
-          $(this).parent('li').addClass('active');
+	<!-- Video -->
+  
+	<div class="video">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2">
+					<div class="video_content">
+						<div class="video_container_outer">
+              
+							<div class="video_overlay d-flex flex-column align-items-center justify-content-center">
+								<h4 class="display-4"><?= $tutorial->nama_tutorial; ?></h4>
+							</div>
+							<div class="video_container">
+								<video id="vid1" class="video-js vjs-default-skin" controls width="100%" height="100%" data-setup='{ "poster": "images/video.jpg", "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<?= $tutorial->link; ?>"}], "youtube": { "iv_load_policy": 1 } }'>
+								</video>
+							</div>
+						</div>
+            <div class="register_button"><a href="soal.php?id=<?= base64_encode($tutorial->id_tutorial); ?>">Kerjakan Soal</a></div>
+            <div class="register_button" style="border-color :red;"><a href="./index.php" style="color:red;">Kembali</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-          var new_image = $(this).find("img").attr('src');
 
-          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            $sidebar_img_container.fadeOut('fast', function() {
-              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-              $sidebar_img_container.fadeIn('fast');
-            });
-          }
+	<!-- Footer -->
 
-          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+	<footer class="footer">
+		<div class="footer_body">
+			<div class="container">
+				<div class="row">
 
-            $full_page_background.fadeOut('fast', function() {
-              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-              $full_page_background.fadeIn('fast');
-            });
-          }
+					<!-- Newsletter -->
+					<div class="col-lg-3 footer_col">
+						<div class="newsletter_container d-flex flex-column align-items-start justify-content-end">
+							<div class="footer_logo mb-auto"><a href="./index.php">Special School</a></div>
+							
+						</div>
+					</div>
 
-          if ($('.switch-sidebar-image input:checked').length == 0) {
-            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+					<!-- About -->
+					<div class="col-lg-2 offset-lg-3 footer_col">
+						<div>
+							<div class="footer_title">About Us</div>
+							<ul class="footer_list">
+								<li><a href="#">Team</a></li>
+								<li><a href="#">Contact us</a></li>
+							</ul>
+						</div>
+					</div>
 
-            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-          }
+					<!-- Help & Support -->
+					<div class="col-lg-2 footer_col">
+						<div class="footer_title">Help & Support</div>
+						<ul class="footer_list">
+							<li><a href="#">Discussions</a></li>
+							<li><a href="#">Troubleshooting</a></li>
+						</ul>
+					</div>
 
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-          }
-        });
+					<!-- Privacy -->
+					<div class="col-lg-2 footer_col clearfix">
+						<div>
+							<div class="footer_title">Privacy & Terms</div>
+							<ul class="footer_list">
+								<li><a href="#">Terms</a></li>
+								<li><a href="#">Privacy</a></li>
+							</ul>
+						</div>
+					</div>
 
-        $('.switch-sidebar-image input').change(function() {
-          $full_page_background = $('.full-page-background');
+				</div>
+			</div>
+		</div>
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="copyright_content d-flex flex-md-row flex-column align-items-md-center align-items-start justify-content-start">
+							<div class="cr"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
 
-          $input = $(this);
-
-          if ($input.is(':checked')) {
-            if ($sidebar_img_container.length != 0) {
-              $sidebar_img_container.fadeIn('fast');
-              $sidebar.attr('data-image', '#');
-            }
-
-            if ($full_page_background.length != 0) {
-              $full_page_background.fadeIn('fast');
-              $full_page.attr('data-image', '#');
-            }
-
-            background_image = true;
-          } else {
-            if ($sidebar_img_container.length != 0) {
-              $sidebar.removeAttr('data-image');
-              $sidebar_img_container.fadeOut('fast');
-            }
-
-            if ($full_page_background.length != 0) {
-              $full_page.removeAttr('data-image', '#');
-              $full_page_background.fadeOut('fast');
-            }
-
-            background_image = false;
-          }
-        });
-
-        $('.switch-sidebar-mini input').change(function() {
-          $body = $('body');
-
-          $input = $(this);
-
-          if (md.misc.sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            md.misc.sidebar_mini_active = false;
-
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-
-          } else {
-
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
-
-            setTimeout(function() {
-              $('body').addClass('sidebar-mini');
-
-              md.misc.sidebar_mini_active = true;
-            }, 300);
-          }
-
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function() {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
-
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function() {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-
-        });
-      });
-    });
-  </script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="plugins/progressbar/progressbar.min.js"></script>
+<script src="plugins/video-js/video.min.js"></script>
+<script src="plugins/video-js/Youtube.min.js"></script>
+<script src="js/instructors.js"></script>
 </body>
-
 </html>
