@@ -147,10 +147,10 @@ $materi = $lib->view_materi();
 					<div class="course">
 						<div class="course_image"><img src="images/course_5.jpg" alt=""></div>
 						<div class="course_body">
-							<div class="course_title"><a href="course.html"><?= $data->nama_materi; ?></a></div>
+							<div class="course_title"><a href="#"><?= $data->nama_materi; ?></a></div>
 							<div class="course_info">
 								<ul>
-									<li><a href="instructors.html">Matematika</a></li>
+									<li><a href="#">Matematika</a></li>
 									<li><a href="#">Materi <?= $data->id_materi; ?></a></li>
 								</ul>
 							</div>

@@ -114,7 +114,7 @@ $view = $lib->view_materi();
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                       <thead class=" text-primary">
                         <th>
                           ID

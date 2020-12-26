@@ -168,15 +168,15 @@ $nilai = $lib->select_nilai($get_data['id_user']);
 						<div class="register_form_title text-center" style="margin-bottom:10px;">History Nilai</div>
 						<table class="table table-light" border="1">
 							<thead>
-								<th >Nilai</th>
 								<th >Nama Tutorial</th>
+								<th >Nilai</th>
 								<th >Status</th>
 							</thead>
 							<?php
 							while ($data = $nilai->fetch(PDO::FETCH_OBJ)) {?>
 							<tr style="color:black;" <?php if($data->status == "FAILED"){echo "class='table-danger'";} ?>>
-								<td><?=$data->nilai;?></td>
 								<td><?=$data->nama_tutorial;?></td>
+								<td><?=$data->nilai;?></td>
 								<td><?=$data->status; ?></td>
 							</tr>
 							<?php } ?>

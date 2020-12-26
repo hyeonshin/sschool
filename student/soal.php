@@ -168,7 +168,7 @@ if (isset($_GET['id'])) {
                                     <p class="lh-sm"><b><?php echo $no = $no+1; ?>.</b>
                                     <?php
 							        if(!empty($data->gambar)){
-                                    echo "<img src='foto/$data[gambar]' width='200' height='200'>";
+                                    echo "<img src='$data->gambar' width='200' height='200'>";
 							        }
 						            ?>
                                     <?= $data->soal;?>

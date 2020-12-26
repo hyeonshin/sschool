@@ -120,12 +120,12 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                       <thead class=" text-primary">
                         <th>
                           ID
                         </th>
-                        <th>
+                        <th >
                           Gambar
                         </th>
                         <th>
@@ -162,7 +162,7 @@ if (isset($_GET['id'])) {
                           <td>
                             <?= $data->id_soal;?>
                           </td>
-                          <td>
+                          <td><span class="d-inline-block text-truncate" style="max-width: 50px;">
                             <?= $data->gambar;?>
                           </td>
                           <td><span class="d-inline-block text-truncate" style="max-width: 150px;">

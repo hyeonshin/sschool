@@ -159,10 +159,10 @@ $get_data = $auth->get_data_std();
 					<div class="course">
 						<div class="course_image"><img src="images/course_8.jpg" alt=""></div>
 						<div class="course_body">
-							<div class="course_title"><a href="course.html"><?php if(isset($data->id_tutorial)){echo $data->nama_tutorial;}else{echo "Data Tidak Ada";} ?></a></div>
+							<div class="course_title"><a href="c#"><?php if(isset($data->id_tutorial)){echo $data->nama_tutorial;}else{echo "Data Tidak Ada";} ?></a></div>
 							<div class="course_info">
 								<ul>
-									<li><a href="instructors.html"><?php if(isset($data->id_tutorial)){echo $materi->nama_materi;} ?></a></li>
+									<li><a href="#"><?php if(isset($data->id_tutorial)){echo $materi->nama_materi;} ?></a></li>
 									<li><a href="#"> <?php if(isset($data->id_tutorial) ){echo "Tutorial ".$a;} ?></a></li>
 								</ul>
 							</div>

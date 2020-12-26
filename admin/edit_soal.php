@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
 
 }
 if (isset($_POST['kirim'])) {
-	$id_soal = htmlentities($_POST['id_soal']);		
+	  $id_soal = htmlentities($_POST['id_soal']);		
     $gambar = htmlentities($_POST['gambar']);
     $soal = htmlentities($_POST['soal']);
     $pil_a = htmlentities($_POST['pil_a']);
