@@ -161,25 +161,25 @@ if (isset($_POST['kirim'])) {
                 </div>
                 <div class="card-body">
                   <form action="" method="post">
-                    <input type="hidden" name="id_soal" class="form-control" value="<?= $data->id_soal; ?>">
+                    <input type="hidden" name="id_soal" class="form-control" value="<?= $data->id_soal;?>">
                     <div class="row">
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Soal</label>
-                          <input type="number" class="form-control" disabled value="<?= $data->id_soal; ?>">
+                          <input type="number" class="form-control" disabled value="<?= $data->id_soal;?>">
                         </div>
                       </div>
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Tutorial</label>
-                          <input type="number" class="form-control" name="id_tutorial" value="<?= $data->id_tutorial; ?>" required>
+                          <input type="number" class="form-control" name="id_tutorial" value="<?= $data->id_tutorial;?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating">Gambar</label>
-                            <textarea class="form-control" rows="2" name="gambar"><?= $data->gambar; ?></textarea>
+                            <textarea class="form-control" rows="2" name="gambar"><?= $data->gambar;?></textarea>
                           </div>
                         </div>
                       </div>
@@ -187,38 +187,38 @@ if (isset($_POST['kirim'])) {
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating">Soal</label>
-                            <textarea class="form-control" rows="3" name="soal" required><?= $data->soal; ?></textarea>
+                            <textarea class="form-control" rows="3" name="soal" required><?= $data->soal;?></textarea>
                           </div>
                         </div>
                       </div>      
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi A</label>
-                          <input type="text" class="form-control" name="pil_a" value="<?= $data->pil_a; ?>" required>
+                          <input type="text" class="form-control" name="pil_a" value="<?= $data->pil_a;?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi B</label>
-                          <input type="text" class="form-control" name="pil_b" value="<?= $data->pil_b; ?>" required>
+                          <input type="text" class="form-control" name="pil_b" value="<?= $data->pil_b;?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi C</label>
-                          <input type="text" class="form-control" name="pil_c" value="<?= $data->pil_c; ?>" required>
+                          <input type="text" class="form-control" name="pil_c" value="<?= $data->pil_c;?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Opsi D</label>
-                          <input type="text" class="form-control" name="pil_d" value="<?= $data->pil_d; ?>" required>
+                          <input type="text" class="form-control" name="pil_d" value="<?= $data->pil_d;?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Kunci Jawaban</label>
-                          <input type="text" class="form-control" name="kj" value="<?= $data->kj; ?>" required>
+                          <input type="text" class="form-control" name="kj" value="<?= $data->kj;?>" required>
                         </div>
                       </div>                
                     </div>

@@ -142,31 +142,31 @@ if (isset($_POST['kirim'])) {
                 </div>
                 <div class="card-body">
                   <form action="" method="post">
-                    <input type="hidden" name="id_tutorial" class="form-control" value="<?= $data->id_tutorial; ?>">
+                    <input type="hidden" name="id_tutorial" class="form-control" value="<?= $data->id_tutorial;?>">
                     <div class="row">
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Student</label>
-                          <input type="number" class="form-control" disabled value="<?= $data->id_tutorial; ?>">
+                          <input type="number" class="form-control" disabled value="<?= $data->id_tutorial;?>">
                         </div>
                       </div>
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Materi</label>
-                          <input type="text" class="form-control" name="id_materi" value="<?= $data->id_materi; ?>" required>
+                          <input type="text" class="form-control" name="id_materi" value="<?= $data->id_materi;?>" required>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Tutorial</label>
-                          <input type="text" class="form-control" name="nama_tutorial" value="<?= $data->nama_tutorial; ?>" required>
+                          <input type="text" class="form-control" name="nama_tutorial" value="<?= $data->nama_tutorial;?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket; ?></textarea>
+                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket;?></textarea>
                           </div>
                         </div>
                       </div>                      
@@ -174,7 +174,7 @@ if (isset($_POST['kirim'])) {
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Link</label>
-                            <textarea class="form-control" rows="2" name="link" required><?= $data->link; ?></textarea>
+                            <textarea class="form-control" rows="2" name="link" required><?= $data->link;?></textarea>
                           </div>
                         </div>
                       </div>

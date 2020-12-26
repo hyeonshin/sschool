@@ -147,19 +147,19 @@ if (isset($_POST['kirim'])) {
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Student</label>
-                          <input type="number" class="form-control" disabled value="<?= $data->id_user; ?>">
+                          <input type="number" class="form-control" disabled value="<?= $data->id_user;?>">
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control" name="username" value=" <?= $data->username; ?> " required>
+                          <input type="text" class="form-control" name="username" value="<?= $data->username;?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama User</label>
-                          <input type="text" class="form-control" name="nama_user" value="<?= $data->nama_user; ?>" required>
+                          <input type="text" class="form-control" name="nama_user" value="<?= $data->nama_user;?>" required>
                         </div>
                       </div>
                       <div class="col-md-3">
@@ -171,7 +171,7 @@ if (isset($_POST['kirim'])) {
                       <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Materi</label>
-                          <input type="number" class="form-control" name="id_materi" value="<?= $data->id_materi; ?>" required>
+                          <input type="number" class="form-control" name="id_materi" value="<?= $data->id_materi;?>" required>
                         </div>
                       </div>
                     </div>

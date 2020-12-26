@@ -136,7 +136,7 @@ $nilai = $lib->select_nilai($get_data['id_user']);
 						<div class="instructor_image_container">
 							<div class="instructor_image"><img src="images/instructor_2.jpg" alt=""></div>
 						</div>
-						<div class="instructor_name"><a href="instructors.html"><?php echo ucwords($get_data['nama_user']);?></a></div>
+						<div class="instructor_name"><a href="#"><?php echo ucwords($get_data['nama_user']);?></a></div>
 						<div class="instructor_title">Student</div>
 						<div class="instructor_text">
 							<figure>

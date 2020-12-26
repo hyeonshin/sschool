@@ -140,25 +140,25 @@ if (isset($_POST['kirim'])) {
                 </div>
                 <div class="card-body">
                   <form action="" method="post">
-                    <input type="hidden" name="id_materi" class="form-control" value="<?= $data->id_materi; ?>">
+                    <input type="hidden" name="id_materi" class="form-control" value="<?= $data->id_materi;?>">
                     <div class="row">
                      <div class="col-md-1">
                         <div class="form-group">
                           <label class="bmd-label-floating">ID Materi</label>
-                          <input type="number" class="form-control" disabled value="<?= $data->id_materi; ?>">
+                          <input type="number" class="form-control" disabled value="<?= $data->id_materi;?>">
                         </div>
                       </div>
                         <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Nama Materi</label>
-                          <input type="text" class="form-control" name="nama_materi" value=" <?= $data->nama_materi; ?> " required>
+                          <input type="text" class="form-control" name="nama_materi" value="<?= $data->nama_materi;?>" required>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <div class="form-group">
                             <label class="bmd-label-floating"> Keterangan</label>
-                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket; ?></textarea>
+                            <textarea class="form-control" rows="5" name="ket" required><?= $data->ket;?></textarea>
                           </div>
                         </div>
                       </div>
