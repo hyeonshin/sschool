@@ -92,10 +92,10 @@ class Library extends Koneksi
 			return FALSE;
 		}
 	}
-	public function count_soal()
+	public function count_soal($id_tutorial)
 	{
 		try {
-			$sql = "SELECT COUNT(*) AS jumlah FROM tbl_soal WHERE aktif='YES'";
+			$sql = "SELECT COUNT(*) AS jumlah FROM tbl_soal WHERE aktif='YES' AND id_tutorial='$id_tutorial'";
 			$query = $this->koneksi->db->query($sql);
 			$jum = $query->fetch(PDO::FETCH_ASSOC);
 			$jumlah = $jum['jumlah'];

@@ -155,7 +155,7 @@ if (isset($_GET['id'])) {
 						<form action="kunci.php" id="register_form" class="register_form" method="post">
 							<div class="row register_row">
 							<?php
-							$jumlah = $lib->count_soal();				
+							$jumlah = $lib->count_soal($id);				
 							$no = 0;
 							$cb = 0;
 							while($data = $view->fetch(PDO::FETCH_OBJ)){

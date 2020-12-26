@@ -54,7 +54,7 @@ if (!$auth->logged_std()) {
 				Hasil = 100 / jumlah soal * Jawaban Benar
 			*/
 
-			$jumlah_soal = $lib->count_soal();
+			$jumlah_soal = $lib->count_soal($id_tutorial);
 			$score = 100 / $jumlah_soal * $benar;
 			$hasil = number_format($score,0);
 		}
