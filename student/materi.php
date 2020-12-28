@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
 	$select = $lib->select_materi($id);
     $materi = $select->fetch(PDO::FETCH_OBJ);
     
-    $select2 = $lib->select_tutorial($id);
+    $select2 = $lib->view_tutorial_id($id);
 }
 
 $get_data = $auth->get_data_std();
@@ -174,7 +174,7 @@ $get_data = $auth->get_data_std();
 							<?php
 							if(isset($data->id_tutorial))
 							{
-								echo "<div class='course_mark course_free trans_200'><a href='tutorial.php?id=".base64_encode($data->id_materi)."'>Pelajari</a></div>";
+								echo "<div class='course_mark course_free trans_200'><a href='tutorial.php?id=".base64_encode($data->id_tutorial)."'>Pelajari</a></div>";
 							}
 							else{
 								echo "<div class='course_mark course_free trans_200'><a href='./'>Kembali</a></div>";

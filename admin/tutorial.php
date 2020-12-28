@@ -168,7 +168,7 @@ if (isset($_GET['id'])) {
                           <td>
                             <button class="btn btn-primary" ><a href="./soal.php?id=<?= base64_encode($data->id_tutorial); ?>"><span class="fa fa-info-circle"> More</a></button>
                             <button class="btn btn-primary" ><a href="./edit_tutorial.php?id=<?= base64_encode($data->id_tutorial); ?>"><span class="fa fa-pencil"> Edit</a></button>
-                            <button class="btn btn-<?php if($data->status_del == NULL) {echo "danger";} else{echo "success";}?>"><a href="./<?php if($data->status_del == NULL) {echo "off";} else{echo "on";}?>_soal.php?id=<?= base64_encode($data->id_tutorial); ?>"><span class="fa fa-power-off"> <?php if($data->status_del == NULL) {echo "OFF";} else{echo "ON";}?></a></button>
+                            <button class="btn btn-<?php if($data->status_del == NULL) {echo "danger";} else{echo "success";}?>"><a href="./<?php if($data->status_del == NULL) {echo "off";} else{echo "on";}?>_tutorial.php?id=<?= base64_encode($data->id_tutorial); ?>"><span class="fa fa-power-off"> <?php if($data->status_del == NULL) {echo "OFF";} else{echo "ON";}?></a></button>
                           </td>
                         </tr>
                         <?php } ?>
