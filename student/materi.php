@@ -150,9 +150,9 @@ $get_data = $auth->get_data_std();
 			<div class="row courses_row">
 				
 				<?php
-								
+				$a = 1;			
 				while ($data = $select2->fetch(PDO::FETCH_OBJ)) {	
-					$a = 1;
+					
                     ?>
 				<!-- Course -->
 				<div class="col-lg-3 course_col">
