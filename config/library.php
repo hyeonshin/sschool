@@ -10,25 +10,17 @@ class Library extends Koneksi
     }
 
     //code registrasi student
-    public function register_std($id_user, $username, $password, $nama_user,$email , $level, $id_materi)
+    public function register_std($username, $password, $nama_user,$email , $level, $id_materi)
 	{
-		$username = htmlentities($_POST['username']);
-		$password = password_hash(htmlentities($_POST['password']), PASSWORD_DEFAULT);
-        $nama_user = htmlentities($_POST['name']);
-        $email = htmlentities($_POST['email']);
-		$level = "student";
-		$id_materi = 1;
-
 		try {
-			$sql = "INSERT INTO `tbl_user`(`id_user`, `username`, `password`, `nama_user`,`email`, `level`, `id_materi`) VALUES (?,?,?,?,?,?,?)";
+			$sql = "INSERT INTO `tbl_user`( `username`, `password`, `nama_user`,`email`, `level`, `id_materi`) VALUES (?,?,?,?,?,?)";
 			$query = $this->koneksi->db->prepare($sql);
-			$query->bindParam(1, $id_user);
-			$query->bindParam(2, $username);
-			$query->bindParam(3, $password);
-			$query->bindParam(4, $nama_user);
-			$query->bindParam(5, $email);
-            $query->bindParam(6, $level);
-			$query->bindParam(7, $id_materi);
+			$query->bindParam(1, $username);
+			$query->bindParam(2, $password);
+			$query->bindParam(3, $nama_user);
+			$query->bindParam(4, $email);
+            $query->bindParam(5, $level);
+			$query->bindParam(6, $id_materi);
 			$query->execute();
 			if ($query) {
 				return "SUCCESS";

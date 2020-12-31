@@ -6,14 +6,14 @@ $lib = new Library();
 $auth = new Authentication();
 
 if (isset($_POST['daftar'])) {
-	$id_user = "";
-	$username = "";
-	$password = "";
-    $nama_user = "";
-    $email = "";
-	$level = "";
-	$id_materi = "";
-	$simpan = $lib->register_std($id_user, $username, $password, $nama_user,$email, $level, $id_materi);
+	$username = htmlentities($_POST['username']);
+	$password = password_hash(htmlentities($_POST['password']), PASSWORD_DEFAULT);
+ 	$nama_user = htmlentities($_POST['name']);
+    $email = htmlentities($_POST['email']);
+	$level = "student";
+	$id_materi = 1;
+	
+	$simpan = $lib->register_std($username, $password, $nama_user,$email, $level, $id_materi);
 	if ($simpan == "SUCCESS") {
 		echo "
 		<script>
