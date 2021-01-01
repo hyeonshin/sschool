@@ -40,7 +40,7 @@ class Library extends Koneksi
 	//code buat soal
 	public function add_soal($gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial)
 	{
-		$date = "";
+		$date = NULL;
 		$aktif = "YES";
 
 		try {
