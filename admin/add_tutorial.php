@@ -19,12 +19,11 @@ if (isset($_GET['id'])) {
 
 }
 if (isset($_POST['kirim'])) {
-	$id_tutorial = "";	
 	$ket = htmlentities($_POST['ket']);
     $id_materi = htmlentities($_POST['id_materi']);  
 	$nama_tutorial = htmlentities($_POST['nama_tutorial']);
 	$link = htmlentities($_POST['link']);
-	$edit = $lib->add_tutorial($id_tutorial,$nama_tutorial, $ket, $id_materi, $link);
+	$edit = $lib->add_tutorial($nama_tutorial, $ket, $id_materi, $link);
 	if ($edit == "SUCCESS") {
 		echo "
 		<script>

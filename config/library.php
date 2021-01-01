@@ -365,17 +365,16 @@ class Library extends Koneksi
 			return FALSE;
 		}
 	}
-	public function add_tutorial($id_tutorial,$nama_tutorial, $ket, $id_materi, $link)
+	public function add_tutorial($nama_tutorial, $ket, $id_materi, $link)
 	{
 		
 		try {
-			$sql = "INSERT INTO `tbl_tutorial`(`id_tutorial`, `nama_tutorial`, `ket`, `id_materi`, `link`) VALUES (?,?,?,?,?)";
+			$sql = "INSERT INTO `tbl_tutorial`(`nama_tutorial`, `ket`, `id_materi`, `link`) VALUES (?,?,?,?)";
 			$query = $this->koneksi->db->prepare($sql);
-			$query->bindParam(1, $id_tutorial);
-			$query->bindParam(2, $nama_tutorial);
-			$query->bindParam(3, $ket);
-			$query->bindParam(4, $id_materi);
-			$query->bindParam(5, $link);
+			$query->bindParam(1, $nama_tutorial);
+			$query->bindParam(2, $ket);
+			$query->bindParam(3, $id_materi);
+			$query->bindParam(4, $link);
 			$query->execute();
 			if ($query) {
 				return "SUCCESS";
