@@ -38,25 +38,24 @@ class Library extends Koneksi
 	}
 
 	//code buat soal
-	public function add_soal($id_soal, $gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial)
+	public function add_soal($gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial)
 	{
 		$date = "";
 		$aktif = "YES";
 
 		try {
-			$sql = "INSERT INTO `tbl_soal`(`id_soal`, `gambar`, `soal`, `pil_a`,`pil_b`, `pil_c`, `pil_d`, `kj`, `date`, `aktif`, `id_tutorial`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			$sql = "INSERT INTO `tbl_soal`(`gambar`, `soal`, `pil_a`,`pil_b`, `pil_c`, `pil_d`, `kj`, `date`, `aktif`, `id_tutorial`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			$query = $this->koneksi->db->prepare($sql);
-			$query->bindParam(1, $id_soal);
-			$query->bindParam(2, $gambar);
-			$query->bindParam(3, $soal);
-			$query->bindParam(4, $pil_a);
-			$query->bindParam(5, $pil_b);
-            $query->bindParam(6, $pil_c);
-			$query->bindParam(7, $pil_d);
-			$query->bindParam(8, $kj);
-			$query->bindParam(9, $date);
-			$query->bindParam(10, $aktif);
-			$query->bindParam(11, $id_tutorial);
+			$query->bindParam(1, $gambar);
+			$query->bindParam(2, $soal);
+			$query->bindParam(3, $pil_a);
+			$query->bindParam(4, $pil_b);
+            $query->bindParam(5, $pil_c);
+			$query->bindParam(6, $pil_d);
+			$query->bindParam(7, $kj);
+			$query->bindParam(8, $date);
+			$query->bindParam(9, $aktif);
+			$query->bindParam(10, $id_tutorial);
 			
 			$query->execute();
 			if ($query) {
@@ -325,15 +324,14 @@ class Library extends Koneksi
 			return FALSE;
 		}
 	}
-	public function add_materi($id_materi, $nama_materi, $ket)
+	public function add_materi($nama_materi, $ket)
 	{
 		
 		try {
-			$sql = "INSERT INTO `tbl_materi`(`id_materi`, `nama_materi`, `ket`) VALUES (?,?,?)";
-			$query = $this->koneksi->db->prepare($sql);
-			$query->bindParam(1, $id_materi);
-			$query->bindParam(2, $nama_materi);
-			$query->bindParam(3, $ket);
+			$sql = "INSERT INTO `tbl_materi`(`nama_materi`, `ket`) VALUES (?,?)";
+			$query = $this->koneksi->db->prepare($sql);			
+			$query->bindParam(1, $nama_materi);
+			$query->bindParam(2, $ket);
 			
 			$query->execute();
 			if ($query) {

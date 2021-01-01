@@ -15,8 +15,7 @@ $get_data = $auth->get_data_admin();
 if (isset($_POST['kirim'])) {
 	$nama_materi = htmlentities($_POST['nama_materi']);
 	$ket = htmlentities($_POST['ket']);
-	$id_materi = "";
-	$edit = $lib->add_materi($id_materi, $nama_materi, $ket);
+	$edit = $lib->add_materi($nama_materi, $ket);
 	if ($edit == "SUCCESS") {
 		echo "
 		<script>

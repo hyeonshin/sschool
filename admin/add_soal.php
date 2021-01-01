@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
 
 }
 if (isset($_POST['kirim'])) {
-	$id_soal = "";	
+	
     $gambar = htmlentities($_POST['gambar']);
     $soal = htmlentities($_POST['soal']);
     $pil_a = htmlentities($_POST['pil_a']);
@@ -30,7 +30,7 @@ if (isset($_POST['kirim'])) {
     $id_tutorial = htmlentities($_POST['id_tutorial']);
     if($kj == $pil_a OR $kj == $pil_b OR $kj == $pil_c OR $kj == $pil_d)
     {
-    $add = $lib->add_soal($id_soal, $gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial);
+    $add = $lib->add_soal($gambar, $soal, $pil_a, $pil_b, $pil_c, $pil_d, $kj, $id_tutorial);
     }
     else{
         $add = "SAMA";
